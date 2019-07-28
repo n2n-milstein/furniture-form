@@ -14,5 +14,7 @@ FEATURES:
     -  allows anyone to submit items
 - add multiple items without typing in contact info multiple times
 - submitted via submit button
+- display different form based on selected value
+    - previously entered info needs to be stored...
 - automated email
     - per item? or per submission?
