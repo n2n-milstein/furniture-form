@@ -64,6 +64,7 @@
             </v-flex>
 
             <v-divider />
+              <br>
             <!-- Physical Attributes -->
             <p class="title">Furniture Information</p>
             <v-flex xs12 class="furnitureItem">
@@ -82,20 +83,35 @@
           </v-form>
 
           <div v-if="selectedItem === 'Bed'">
+            <v-flex xs12>
             Bed Selected
+            <Bed/>
+            </v-flex>
 
           </div>
           <div v-else-if="selectedItem === 'Chair'">
-            Chair Selected
+              <v-flex xs12>
+                  Chair Selected
+                  <Chair/>
+              </v-flex>
           </div>
           <div v-else-if="selectedItem === 'Table'">
-            Table Selected
+              <v-flex xs12>
+                  Table Selected
+                  <Table/>
+              </v-flex>
           </div>
           <div v-else-if="selectedItem === 'Dresser'">
-            Dresser Selected
+              <v-flex xs12>
+                  Dresser Selected
+                  <Dresser/>
+              </v-flex>
           </div>
           <div v-else-if="selectedItem === 'Other'">
-            Dresser Selected
+              <v-flex xs12>
+                  Other Selected
+                  <Other />
+              </v-flex>
           </div>
           <div v-else>
           </div>
@@ -112,7 +128,11 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Prop, Component } from "vue-property-decorator";
-import Bed from "@/components/Bed.vue"
+import Bed from "@/components/Bed.vue";
+import Chair from "@/components/Chair.vue";
+import Table from "@/components/Table.vue";
+import Dresser from "@/components/Dresser.vue";
+import Other from "@/components/Other.vue";
 
 @Component({
     components: {

@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-layout>
-            <p>HELLO I AM HERE AND BED!</p>
+            <p>BED INFORMATION HERE</p>
         </v-layout>
     </v-container>
 </template>
