@@ -69,12 +69,19 @@
             <p class="title">Furniture Information</p>
             <v-flex xs12 class="furnitureItem">
             <v-select
-                    v-model="selectedItem"
+                    v-model="fclass"
                     :items="classOptions"
                     :rules="[v => !!v || 'Item is required']"
                     label="Furniture Class"
                     required
             ></v-select>
+
+                <v-btn
+                        flat
+                        color="primary"
+                        @click=addItem()
+                        > ADD ITEM
+                </v-btn>
 
             <!--<physical-attr :fclass="fclass"></physical-attr>-->
 
@@ -82,39 +89,7 @@
 
           </v-form>
 
-          <div v-if="selectedItem === 'Bed'">
-            <v-flex xs12>
-            Bed Selected
-            <Bed/>
-            </v-flex>
 
-          </div>
-          <div v-else-if="selectedItem === 'Chair'">
-              <v-flex xs12>
-                  Chair Selected
-                  <Chair/>
-              </v-flex>
-          </div>
-          <div v-else-if="selectedItem === 'Table'">
-              <v-flex xs12>
-                  Table Selected
-                  <Table/>
-              </v-flex>
-          </div>
-          <div v-else-if="selectedItem === 'Dresser'">
-              <v-flex xs12>
-                  Dresser Selected
-                  <Dresser/>
-              </v-flex>
-          </div>
-          <div v-else-if="selectedItem === 'Other'">
-              <v-flex xs12>
-                  Other Selected
-                  <Other />
-              </v-flex>
-          </div>
-          <div v-else>
-          </div>
 
       <!-- </v-container> -->
     </v-card-text>
@@ -128,24 +103,46 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Prop, Component } from "vue-property-decorator";
-import Bed from "@/components/Bed.vue";
-import Chair from "@/components/Chair.vue";
-import Table from "@/components/Table.vue";
-import Dresser from "@/components/Dresser.vue";
-import Other from "@/components/Other.vue";
+import { FClass } from "@/data/Furniture";
+import PhysicalAttr from "@/components/PhysicalAttr.vue";
+import * as firebase from "firebase/app";
+import "firebase/firestore";
+
 
 @Component({
     components: {
-        Bed
+        PhysicalAttr
     }
 })
 export default class Form extends Vue {
-    @Prop({
-        default: true,
-    })
+    donorName="";
+    phone="";
+    email="";
+    zone="";
+    address="";
+
     zones = ["Ithaca", "Groton", "Dryden", "Lansing", "Caroline", "Danby", "Newfield", "Enfield", "Ulysses"];
-    classOptions = ["Bed", "Chair", "Table", "Dresser", "Other"]
-    selectedItem = -1;
+    classOptions = Object.keys(FClass);
+    fclass = -1;
+
+    db = firebase.firestore();
+
+    addItem() {
+        this.db.collection('formTest').add({
+            name : this.donorName,
+            phone : this.phone,
+            email: this.email,
+            zone: this.zone,
+            address: this.address
+        })
+            .then(() => {
+                console.log("test successful");
+            })
+            .catch(error => {
+                console.log("error");
+            });
+    }
+
 }
 
 </script>
