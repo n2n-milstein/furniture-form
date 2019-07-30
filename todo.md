@@ -14,9 +14,15 @@ FEATURES:
     -  allows anyone to submit items
 - add multiple items without typing in contact info multiple times
 - submitted via submit button
+    - MOVE TO COMPONENT AND SEND DONOR INFO AS PROPS
 - display different form based on selected value
     - previously entered info needs to be stored...
 - automated email
     - per item? or per submission?
+- require all fields to be filled before submitting
 
-TEST
+QUESTIONS:
+- do attributes go into PhysicalAttr?
+- how to pass up data...with emit?
+- save attribute values & how to use Furniture.ts
+    - dict or class?

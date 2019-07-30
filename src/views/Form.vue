@@ -2,11 +2,10 @@
   <v-container grid-list-xl align-center>
     <v-layout wrap fluid>
       <v-flex xs10 offset-xs1>
-  <v-card>
-    <v-card-title class="headline" primary-title>
-      N2N Furniture Donation Form
-    </v-card-title>
-
+      <v-card>
+        <v-card-title class="headline" primary-title>
+          N2N Furniture Donation Form
+        </v-card-title>
     <v-flex xs12>
     <v-card-text>
       <!-- <v-container> -->
@@ -76,14 +75,18 @@
                     required
             ></v-select>
 
-                <v-btn
-                        flat
-                        color="primary"
-                        @click=addItem()
-                        > ADD ITEM
-                </v-btn>
+                <!--<v-btn-->
+                        <!--flat-->
+                        <!--color="primary"-->
+                        <!--@click=addItem()-->
+                        <!--&gt; ADD ITEM-->
+                <!--</v-btn>-->
+                <v-flex xs12>
+                    <div v-if="fclass !== -1">
+                        <physical-attr :fclass="fclass"></physical-attr>
+                    </div>
+                </v-flex>
 
-            <!--<physical-attr :fclass="fclass"></physical-attr>-->
 
             </v-flex>
 
@@ -133,7 +136,10 @@ export default class Form extends Vue {
             phone : this.phone,
             email: this.email,
             zone: this.zone,
-            address: this.address
+            address: this.address,
+
+            class: this.fclass,
+
         })
             .then(() => {
                 console.log("test successful");
@@ -142,7 +148,6 @@ export default class Form extends Vue {
                 console.log("error");
             });
     }
-
 }
 
 </script>
