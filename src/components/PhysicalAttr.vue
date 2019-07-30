@@ -83,7 +83,7 @@
                 <v-btn
                     flat
                     color="primary"
-                    @click=addBed()
+                    @click=addItem()
                     > ADD BED
                 </v-btn>
             </v-flex>
@@ -143,17 +143,27 @@
 
         db = firebase.firestore();
 
-        addBed() {
+        addItem() {
             this.db.collection('formTest').add({
-                class: this.fclass,
-                size: this.size,
-                material: this.material,
-                altMaterial: this.altMaterial,
-                hasFrame: this.hasFrame,
-                hasBoxSpring: this.hasBoxSpring,
-                heavy: this.heavy,
-                partsIntact: this.attrValuesDict['partsIntact'],
-                finishIntact: this.attrValuesDict['finishIntact'],
+                physical: {
+                    class: this.fclass,
+                    size: this.size,
+                    material: this.material,
+                    altMaterial: this.altMaterial,
+                    hasFrame: this.hasFrame,
+                    hasBoxSpring: this.hasBoxSpring,
+                    heavy: this.heavy,
+                },
+                attributes: {
+                    partsIntact: this.attrValuesDict['partsIntact'],
+                    finishIntact: this.attrValuesDict['finishIntact'],
+                    smokeFree: this.attrValuesDict['smokeFree'],
+                    petFree: this.attrValuesDict['petFree'],
+                    bedbugFree: this.attrValuesDict['bedbugFree'],
+                    mildewFree: this.attrValuesDict['mildewFree'],
+                    donateToFriend: this.attrValuesDict['donateToFriend']
+                },
+
             })
                 .then(() => {
                     console.log("successfully added bed to formTest collection");
