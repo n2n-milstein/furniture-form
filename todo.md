@@ -8,6 +8,11 @@ PROCESS:
 5. Test rules and configure appropriately
 6. Style tweaks
 
+TODO:
+- add id field, images, timing
+- wipe fields and redirect?? when add item button is clicked
+    - customize fields for button depending on class
+
 
 FEATURES:
 - submit directly to 'pending' collection in Firestore

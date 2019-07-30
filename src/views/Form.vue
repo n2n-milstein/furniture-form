@@ -75,15 +75,16 @@
                     required
             ></v-select>
 
-                <!--<v-btn-->
-                        <!--flat-->
-                        <!--color="primary"-->
-                        <!--@click=addItem()-->
-                        <!--&gt; ADD ITEM-->
-                <!--</v-btn>-->
                 <v-flex xs12>
                     <div v-if="fclass !== -1">
-                        <physical-attr :fclass="fclass"></physical-attr>
+                        <physical-attr
+                                :fclass="fclass"
+                                :donorName="donorName"
+                                :phone="phone"
+                                :email="email"
+                                :zone="zone"
+                                :address="address"
+                        ></physical-attr>
                     </div>
                 </v-flex>
 
@@ -108,8 +109,6 @@ import Vue from 'vue';
 import { Prop, Component } from "vue-property-decorator";
 import { FClass } from "@/data/Furniture";
 import PhysicalAttr from "@/components/PhysicalAttr.vue";
-import * as firebase from "firebase/app";
-import "firebase/firestore";
 
 
 @Component({
@@ -127,27 +126,6 @@ export default class Form extends Vue {
     zones = ["Ithaca", "Groton", "Dryden", "Lansing", "Caroline", "Danby", "Newfield", "Enfield", "Ulysses"];
     classOptions = Object.keys(FClass);
     fclass = -1;
-
-    db = firebase.firestore();
-
-    addItem() {
-        this.db.collection('formTest').add({
-            name : this.donorName,
-            phone : this.phone,
-            email: this.email,
-            zone: this.zone,
-            address: this.address,
-
-            class: this.fclass,
-
-        })
-            .then(() => {
-                console.log("test successful");
-            })
-            .catch(error => {
-                console.log("error");
-            });
-    }
 }
 
 </script>

@@ -66,8 +66,11 @@
 
         </div>
         <v-flex xs12>
-            <div>Other physical attributes</div>
+            <div>Other Physical Attributes</div>
             <v-checkbox v-model="heavy" label="Heavy furniture"></v-checkbox>
+        </v-flex>
+            <v-flex xs12>
+            <div>Item Quality Attributes</div>
             <v-radio-group>
                 <v-checkbox
                         v-for="(attr, index) in attributes"
@@ -79,12 +82,22 @@
             </v-radio-group>
         </v-flex>
 
+            <v-flex xs8>
+                <div>Additional Notes</div>
+                <v-textarea
+                        outlined
+                        v-model="comments"
+                        label="Enter any additional notes here."
+                ></v-textarea>
+
+            </v-flex>
+
             <v-flex v-if="fclass === 'Bed'" xs5>
                 <v-btn
                     flat
                     color="primary"
                     @click=addItem()
-                    > ADD BED
+                    > ADD ITEM
                 </v-btn>
             </v-flex>
         </v-layout>
@@ -104,6 +117,21 @@
     export default class PhysicalAttr extends Vue {
         @Prop()
         fclass!: FClass;
+
+        @Prop()
+        donorName!: string;
+
+        @Prop()
+        phone!: string;
+
+        @Prop()
+        email!: string;
+
+        @Prop()
+        zone!: string;
+
+        @Prop()
+        address!: string;
 
         materials = Object.keys(Material);
 
@@ -127,6 +155,7 @@
         hasFrame = false;
         hasBoxSpring = false;
         heavy = false;
+        comments = "";
 
         // These will be set programmatically based on user input
         set = false;
@@ -145,6 +174,13 @@
 
         addItem() {
             this.db.collection('formTest').add({
+                donor: {
+                    name: this.donorName,
+                    phone: this.phone,
+                    email: this.email,
+                    zone: this.zone,
+                    address: this.address,
+                },
                 physical: {
                     class: this.fclass,
                     size: this.size,
@@ -163,7 +199,9 @@
                     mildewFree: this.attrValuesDict['mildewFree'],
                     donateToFriend: this.attrValuesDict['donateToFriend']
                 },
-
+                staffNotes: "",
+                status:0,
+                comments:this.comments,
             })
                 .then(() => {
                     console.log("successfully added bed to formTest collection");
